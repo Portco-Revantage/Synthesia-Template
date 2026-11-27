@@ -1,8 +1,13 @@
+import { useEffect } from "react";
 import { Clapperboard } from "lucide-react";
 import { Toaster } from "@/components/ui/sonner";
 import { HomePage } from "@/pages/home";
 
 export function AppShell() {
+  // The glass theme is dark; this turns on the dark variants of status colours too.
+  useEffect(() => {
+    document.documentElement.classList.add("dark");
+  }, []);
   return (
     <div className="flex min-h-screen flex-col">
       <a
@@ -11,9 +16,11 @@ export function AppShell() {
       >
         Skip to workspace
       </a>
-      <header className="sticky top-0 z-30 flex h-14 items-center gap-3 border-b bg-primary px-4 text-primary-foreground">
-        <Clapperboard className="size-5" aria-hidden="true" />
-        <span className="text-base font-semibold tracking-tight">Synthesia Template Builder</span>
+      <header className="glass sticky top-3 z-30 mx-4 mt-3 flex h-16 items-center gap-3 rounded-2xl px-5">
+        <span className="grid size-9 place-items-center rounded-xl bg-gradient-to-br from-violet-500 via-indigo-500 to-cyan-500 shadow-lg shadow-violet-900/50">
+          <Clapperboard className="size-5 text-white" aria-hidden="true" />
+        </span>
+        <span className="glow-text text-lg font-semibold tracking-tight">Synthesia Template Builder</span>
       </header>
       <main className="flex flex-1 flex-col">
         <HomePage />

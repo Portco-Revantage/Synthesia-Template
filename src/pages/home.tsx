@@ -227,7 +227,7 @@ function Swatches({ d }: { d: Design }) {
     <ul className="flex gap-2" aria-label="Palette colours">
       {sw.map(([n, c]) => (
         <li key={n} className="flex flex-col items-center gap-1">
-          <span className="size-9 rounded-md ring-1 ring-black/10" style={{ background: `#${c}` }} aria-hidden="true" />
+          <span className="size-9 rounded-lg shadow-md ring-1 ring-white/25" style={{ background: `#${c}` }} aria-hidden="true" />
           <span className="text-[11px]">{n}</span>
           <span className="sr-only">#{c}</span>
         </li>
@@ -445,8 +445,8 @@ export function HomePage() {
   const current = slides[selected];
 
   return (
-    <div className="grid flex-1 md:grid-cols-[16rem_1fr]">
-      <nav aria-label="Training projects" className="flex flex-col gap-3 border-b bg-muted/40 p-4 md:border-b-0 md:border-r">
+    <div className="grid flex-1 gap-4 p-4 md:grid-cols-[17rem_1fr]">
+      <nav aria-label="Training projects" className="glass flex flex-col gap-3 rounded-2xl p-4 md:sticky md:top-24 md:max-h-[calc(100vh-7rem)] md:self-start md:overflow-auto">
         <div className="flex items-center justify-between">
           <h2 className="text-sm font-semibold">Projects</h2>
           <Button size="sm" variant="outline" onClick={addProject}>
@@ -469,7 +469,7 @@ export function HomePage() {
                   }}
                   className={cn(
                     "flex w-full items-center gap-2.5 rounded-md border border-transparent px-2.5 py-2 text-left hover:bg-accent focus-visible:outline-2 focus-visible:outline-ring",
-                    isCurrent && "border-control-border bg-background shadow-xs",
+                    isCurrent && "border-white/25 bg-white/15 shadow-lg shadow-violet-950/40",
                   )}
                 >
                   <span className="flex h-8 w-3 shrink-0 flex-col overflow-hidden rounded-sm" aria-hidden="true">
@@ -490,7 +490,7 @@ export function HomePage() {
         </div>
       </nav>
 
-      <div id="work" tabIndex={-1} className="min-w-0 p-4 outline-none md:p-6">
+      <div id="work" tabIndex={-1} className="glass min-w-0 rounded-2xl p-4 outline-none md:p-6">
         {!active || !design ? (
           <div className="flex flex-col items-start gap-3">
             <h1 className="text-xl font-semibold">No projects yet</h1>
@@ -502,7 +502,7 @@ export function HomePage() {
         ) : (
           <Tabs value={tab} onValueChange={(v) => setTab(v as "prompt" | "template")} className="gap-5">
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <h1 className="min-w-0 truncate text-xl font-semibold">{active.name || parsed.name || "Untitled project"}</h1>
+              <h1 className="glow-text min-w-0 truncate text-2xl font-semibold tracking-tight">{active.name || parsed.name || "Untitled project"}</h1>
               <div className="flex items-center gap-2">
                 <TabsList>
                   <TabsTrigger value="prompt">1 · Prompt</TabsTrigger>
@@ -573,13 +573,13 @@ export function HomePage() {
                 </div>
                 <ol className="flex flex-wrap gap-1.5" aria-label="Slide plan">
                   {defaultLayouts(active.slideCount).map((l, i) => (
-                    <li key={i} className="rounded-md border bg-card px-2 py-1 text-xs">
+                    <li key={i} className="rounded-full border bg-white/8 px-2.5 py-1 text-xs backdrop-blur">
                       {i + 1}. {l}
                     </li>
                   ))}
                 </ol>
 
-                <section aria-labelledby="import-h" className="grid gap-3 rounded-lg border bg-card p-4">
+                <section aria-labelledby="import-h" className="grid gap-3 rounded-2xl border bg-card p-4 shadow-xl shadow-black/20">
                   <div>
                     <h2 id="import-h" className="text-sm font-semibold">
                       Fill slides from a document
@@ -639,7 +639,7 @@ export function HomePage() {
                 </section>
               </div>
 
-              <section aria-labelledby="design-h" className="grid content-start gap-4 rounded-lg border bg-card p-4">
+              <section aria-labelledby="design-h" className="grid content-start gap-4 rounded-2xl border bg-card p-4 shadow-xl shadow-black/20">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <h2 id="design-h" className="text-sm font-semibold">
                     Design: {design.palette.name}
@@ -650,10 +650,10 @@ export function HomePage() {
                   </Button>
                 </div>
                 <div className="grid grid-cols-2 gap-3">
-                  <div className="overflow-hidden rounded-md shadow-sm ring-1 ring-black/10">
+                  <div className="overflow-hidden rounded-xl shadow-xl shadow-black/40 ring-1 ring-white/15">
                     <SlideSvg shapes={previewTitle} avatar={active.avatar} guides={false} title={`Title slide in ${design.palette.name}`} />
                   </div>
-                  <div className="overflow-hidden rounded-md shadow-sm ring-1 ring-black/10">
+                  <div className="overflow-hidden rounded-xl shadow-xl shadow-black/40 ring-1 ring-white/15">
                     <SlideSvg shapes={previewContent} avatar={active.avatar} guides={false} title={`Content slide in ${design.palette.name}`} />
                   </div>
                 </div>
@@ -673,7 +673,7 @@ export function HomePage() {
 
             <TabsContent value="template" className="grid gap-4">
               {!active.layouts || !current ? (
-                <div className="flex flex-col items-start gap-3 rounded-lg border border-dashed p-6">
+                <div className="flex flex-col items-start gap-3 rounded-2xl border border-dashed border-white/25 bg-white/5 p-6">
                   <h2 className="text-base font-semibold">No template yet</h2>
                   <Button onClick={build}>
                     <Wand2 aria-hidden="true" />
@@ -704,7 +704,7 @@ export function HomePage() {
                   </div>
 
                   <div className="grid gap-4 2xl:grid-cols-[1fr_16rem]">
-                    <figure className="overflow-hidden rounded-lg shadow-md ring-1 ring-black/10">
+                    <figure className="overflow-hidden rounded-xl shadow-2xl shadow-black/50 ring-1 ring-white/20">
                       <SlideSvg
                         shapes={current.shapes}
                         avatar={active.avatar}
@@ -750,7 +750,7 @@ export function HomePage() {
                       {active.content && (
                         <div className="grid gap-1">
                           <p className="text-xs font-semibold">Speaker notes (avatar script)</p>
-                          <p className="max-h-48 overflow-auto whitespace-pre-line rounded-md border bg-muted/40 p-2 text-xs">{current.notes || "No notes for this slide."}</p>
+                          <p className="max-h-48 overflow-auto whitespace-pre-line rounded-lg border bg-white/6 p-2 text-xs">{current.notes || "No notes for this slide."}</p>
                         </div>
                       )}
                     </div>
@@ -764,8 +764,8 @@ export function HomePage() {
                           aria-pressed={i === selected}
                           onClick={() => setSelected(i)}
                           className={cn(
-                            "block w-full overflow-hidden rounded-md text-left ring-1 ring-black/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
-                            i === selected && "ring-2 ring-primary",
+                            "block w-full overflow-hidden rounded-lg text-left shadow-lg shadow-black/30 ring-1 ring-white/15 transition hover:-translate-y-0.5 hover:ring-white/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
+                            i === selected && "ring-2 ring-cyan-300",
                           )}
                         >
                           <SlideSvg shapes={s.shapes} avatar={active.avatar} guides={false} title={`Slide ${i + 1}: ${s.layout}`} />
